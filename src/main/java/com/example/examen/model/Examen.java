@@ -1,9 +1,20 @@
 package com.example.examen.model;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name="examenes")
 public class Examen {
     @Id
@@ -13,7 +24,8 @@ public class Examen {
     private String tipo;
     private String resultado;
 
-    @Column(name="creado_en")
+    @CreatedDate
+    @Column(name="creado_en", nullable=false, updatable=false)
     private LocalDateTime creadoEn;
 
     // Constructor vacío
